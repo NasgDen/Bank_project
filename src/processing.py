@@ -4,11 +4,7 @@ def filter_by_state(list_of_dic: list, state="EXECUTED") -> list:
     Возвращает новый список словарей, содержащий только те словари,
     у которых ключ state соответствует указанному значению.
     """
-    new_list_of_dic = []
-    for dic in list_of_dic:
-        if dic.get("state") == state:
-            new_list_of_dic.append(dic)
-    return new_list_of_dic
+    return list(filter(lambda operation: operation.get("state") == state, list_of_dic))
 
 
 def sort_by_date(list_of_dic: list, descending=True) -> list:
