@@ -12,7 +12,7 @@ if __name__ == "__main__":
     ]
     # Ввод данных о номере карты и счета
     card_number = input("Введите номер карты: ")
-    account_number = int(input("Введите номер счета: "))
+    account_number = input("Введите номер счета: ")
     user_card_or_account_number = input("Введите номер карты или счета: ")
 
     # Вывод работы функций
