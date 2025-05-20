@@ -34,4 +34,3 @@ def get_date(date_time: str) -> str:
         return day + "." + month + "." + year
     else:
         return "Неправильный формат даты"
-    #return ".".join(date)
