@@ -19,6 +19,6 @@ if __name__ == "__main__":
     print(f"Номер карты: {get_mask_card_number(card_number)}")
     print(f"Номер счета: {get_mask_account(account_number)}")
     print(mask_account_card(user_card_or_account_number))
-    print(get_date("2024-03-11T02:26:18.671407"))
+    print(get_date("2024 03 11T02:26:18.671407"))
     print(filter_by_state(list_of_dic, "EXECUTED"))
     print(sort_by_date(list_of_dic))
