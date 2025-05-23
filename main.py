@@ -1,5 +1,5 @@
 from src.masks import get_mask_account, get_mask_card_number
-from src.generator import filter_by_currency
+from src.generator import filter_by_currency, transaction_descriptions
 from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
 
@@ -98,14 +98,27 @@ if __name__ == "__main__":
     # Вывод работы функций
     print(f"Номер карты: {get_mask_card_number(card_number)}")
     print(f"Номер счета: {get_mask_account(account_number)}")
+    print("Вывод работы функции mask_account_card:")
     print(mask_account_card(user_card_or_account_number))
+    print("Вывод работы функции get_date:")
     print(get_date("2024-03-11T02:26:18.671407"))
+    print("Вывод работы функции filter_by_state:")
     print(filter_by_state(list_of_dic, "EXECUTED"))
+    print("Вывод работы функции sort_by_date:")
     print(sort_by_date(list_of_dic))
 
+    print("Вывод работы функции filter_by_currency:")
     usd_transactions = filter_by_currency(transactions, "USD")
     try:
-        for _ in range(10):
+        for _ in range(3):
             print(next(usd_transactions))
     except StopIteration:
-        pass
+        print("Все итерации выполнены")
+
+    print("Вывод работы функции transaction_descriptions:")
+    descriptions = transaction_descriptions(transactions)
+    try:
+        for _ in range(5):
+            print(next(descriptions))
+    except StopIteration:
+        print("Все итерации выполнены")
