@@ -1,5 +1,5 @@
+from src.generator import card_number_generator, filter_by_currency, transaction_descriptions
 from src.masks import get_mask_account, get_mask_card_number
-from src.generator import filter_by_currency, transaction_descriptions, card_number_generator
 from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
 
@@ -110,7 +110,7 @@ if __name__ == "__main__":
     print("Вывод работы функции filter_by_currency:")
     usd_transactions = filter_by_currency(transactions, "USD")
     try:
-        for _ in range(3):
+        for _ in range(5):
             print(next(usd_transactions))
     except StopIteration:
         print("Все итерации выполнены")
@@ -124,5 +124,5 @@ if __name__ == "__main__":
         print("Все итерации выполнены")
 
     print("Вывод работы функции card_number_generator:")
-    for card_number in card_number_generator(19, 25):
+    for card_number in card_number_generator(10, 15):
         print(card_number)
