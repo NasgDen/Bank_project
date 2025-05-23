@@ -11,8 +11,8 @@ if __name__ == "__main__":
         {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}
     ]
     # Ввод данных о номере карты и счета
-    card_number = int(input("Введите номер карты: "))
-    account_number = int(input("Введите номер счета: "))
+    card_number = input("Введите номер карты: ")
+    account_number = input("Введите номер счета: ")
     user_card_or_account_number = input("Введите номер карты или счета: ")
 
     # Вывод работы функций
