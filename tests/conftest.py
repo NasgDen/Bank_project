@@ -135,6 +135,7 @@ def data():
         ]
     )
 
+
 @pytest.fixture
 def filter_by_currency_usd_1():
     return {
@@ -171,6 +172,7 @@ def filter_by_currency_usd_2():
                 "from": "Счет 19708645243227258542",
                 "to": "Счет 75651667383060284188"
             }
+
 
 @pytest.fixture
 def filter_by_currency_usd_3():
