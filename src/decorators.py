@@ -1,5 +1,5 @@
-from time import ctime
 from functools import wraps
+from time import ctime
 
 
 def log(file_name=None):
@@ -7,32 +7,29 @@ def log(file_name=None):
         @wraps(function)
         def wrapper(*args, **kwargs):
             try:
-                if file_name:
-                    with open(file_name, mode="a", encoding="utf-8") as file:
-                        file.write(f"{ctime()}: Начало работы функции {function.__name__}\n")
-                        # file.write(f"Функция {args, kwargs} успешно завершила работу\n")
-                        # file.write(f"Передаваемые параметры {args, kwargs}\n")
-                else:
-                    print(f"{ctime()}: Начало работы функции {function.__name__}")
-                    # print(f"Передаваемые параметры {args, kwargs}")
+                start_time = ctime()
                 result = function(*args, **kwargs)
+                end_time = ctime()
                 if file_name:
                     with open(file_name, mode="a", encoding="utf-8") as file:
-                        file.write(f"{ctime()}: Функция успешно завершила работу\n")
-                        # file.write(f"Передаваемые параметры {args, kwargs}\n")
+                        file.write(f"{start_time}: Начало работы функции {function.__name__}\n")
+                        file.write(f"{end_time}: Функция {function.__name__} успешно завершила работу\n")
+                        file.write(f"Передаваемые параметры {args, kwargs}\n")
                 else:
-                    print(f"{ctime()}: Функция успешно завершила работу")
-                    # print(f"Передаваемые параметры {args, kwargs}")
+                    print(f"{start_time}: Начало работы функции {function.__name__}")
+                    print(f"{end_time}: Функция {function.__name__} успешно завершила работу")
+                    print(f"Передаваемые параметры {args, kwargs}")
+                return result
             except Exception as error:
+                error_time = ctime()
                 error_type = type(error).__name__
                 if file_name:
                     with open(file_name, mode="a", encoding="utf-8") as file:
-                        file.write(f"{ctime()}: Ошибка в работе функции {function.__name__}: {error_type}\n")
-                        # file.write(f"Функция {args, kwargs} успешно завершила работу\n")
+                        file.write(f"{error_time}: Ошибка в работе функции {function.__name__}: {error_type}\n")
                         file.write(f"Аргументы функции: {args, kwargs}\n")
                 else:
-                    print(f"{ctime()}: Ошибка в работе функции {function.__name__}: {error_type}")
+                    print(f"{error_time}: Ошибка в работе функции {function.__name__}: {error_type}")
                     print(f"Аргументы функции {function.__name__}: {args, kwargs}")
-            return result
+                return error_type
         return wrapper
     return log_decorator

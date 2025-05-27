@@ -1,5 +1,6 @@
 from src.decorators import log
 
+
 @log()
 def filter_by_state(list_of_dic: list, state="EXECUTED") -> list:
     """

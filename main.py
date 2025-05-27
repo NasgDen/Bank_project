@@ -2,8 +2,6 @@ from src.generator import card_number_generator, filter_by_currency, transaction
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
-from src.decorators import log
-
 
 if __name__ == "__main__":
     # Список словарей для проверки функции filter_by_state
@@ -128,9 +126,3 @@ if __name__ == "__main__":
     print("Вывод работы функции card_number_generator:")
     for card_number in card_number_generator(10, 15):
         print(card_number)
-
-@log("log.txt")
-def devide(x, y):
-    return x / y
-
-devide(4, 0)
