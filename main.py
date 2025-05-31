@@ -1,7 +1,12 @@
+import os
+
 from src.generator import card_number_generator, filter_by_currency, transaction_descriptions
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
+from src.utils import read_json
 from src.widget import get_date, mask_account_card
+
+PATH_TO_JSON_FILE = os.path.join(os.getcwd(), "data", "operations.json")
 
 if __name__ == "__main__":
     # Список словарей для проверки функции filter_by_state
@@ -126,3 +131,5 @@ if __name__ == "__main__":
     print("Вывод работы функции card_number_generator:")
     for card_number in card_number_generator(10, 15):
         print(card_number)
+
+    print(read_json(PATH_TO_JSON_FILE))
