@@ -1,3 +1,6 @@
+# from src.decorators import log
+#
+# @log()
 def get_mask_card_number(card_number: str) -> str:
     """
     Функция принимает на вход номер карты в виде числа и возвращает маску номера по правилу XXXX XX** **** XXXX.
