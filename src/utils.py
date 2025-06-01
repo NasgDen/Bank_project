@@ -11,9 +11,6 @@ def read_json(path_to_json: str) -> list[dict]:
         with open(path_to_json, mode="r", encoding="utf-8") as file:
             transactions = json.load(file)
             return transactions
-    except FileNotFoundError:
-        transactions = []
-        return transactions
-    except json.JSONDecodeError:
+    except (FileNotFoundError, json.JSONDecodeError):
         transactions = []
         return transactions

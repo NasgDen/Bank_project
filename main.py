@@ -5,6 +5,7 @@ from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.utils import read_json
 from src.widget import get_date, mask_account_card
+from src.external_api import get_convert_to_rus
 
 PATH_TO_JSON_FILE = os.path.join(os.getcwd(), "data", "operations.json")
 
@@ -132,4 +133,9 @@ if __name__ == "__main__":
     for card_number in card_number_generator(10, 15):
         print(card_number)
 
-    print(read_json(PATH_TO_JSON_FILE))
+    list_transactions = read_json(PATH_TO_JSON_FILE)
+    # print(list_transactions[1])
+    # print((list_transactions[1].get("operationAmount")).get("amount"))
+    # print(((list_transactions[1].get("operationAmount")).get("currency")).get("code"))
+   # print(get_convert_to_rus())
+    print(f"{get_convert_to_rus(list_transactions[4])} руб.")
