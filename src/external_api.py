@@ -1,15 +1,16 @@
 import os
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import requests
 
 
-def get_convert_to_rus(transactions:dict):
-
-    path_env = os.path.join(os.getcwd(), ".env")
-    load_dotenv(path_env)
-    api_key = os.getenv("API_KEY")
-    # print(api_key)
-
+def get_convert_to_rub(transactions: dict):
+    """
+    Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях, тип данных — float.
+    Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
+    и конвертации суммы операции в рубли.
+    :param transactions:
+    :return:
+    """
     if ((transactions.get("operationAmount")).get("currency")).get("code") != "RUB":
         name = ((transactions.get("operationAmount")).get("currency")).get("code")
         amount = (transactions.get("operationAmount")).get("amount")
@@ -18,18 +19,12 @@ def get_convert_to_rus(transactions:dict):
         api_key = os.getenv("API_KEY")
         url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={name}&amount={amount}"
         payload = {}
-        headers= {
+        headers = {
           "apikey": f"{api_key}"
         }
-
-        response = requests.request("GET", url, headers=headers, data = payload)
-
-        status_code = response.status_code
+        response = requests.get(url, headers=headers, data=payload)
+        # status_code = response.status_code
         result = response.json()
-        return f"{result.get("result"):.2f}"
+        return round(result.get("result"), 2)
     else:
         return (transactions.get("operationAmount")).get("amount")
-
-
-    # print(api_key)
-    # return result
