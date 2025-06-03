@@ -1,9 +1,10 @@
 import os
-from dotenv import load_dotenv
+
 import requests
+from dotenv import load_dotenv
 
 
-def get_convert_to_rub(transactions: dict):
+def get_convert_to_rub(transactions: dict) -> float|str:
     """
     Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях, тип данных — float.
     Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
@@ -23,7 +24,6 @@ def get_convert_to_rub(transactions: dict):
           "apikey": f"{api_key}"
         }
         response = requests.get(url, headers=headers, data=payload)
-        # status_code = response.status_code
         result = response.json()
         return round(result.get("result"), 2)
     else:
