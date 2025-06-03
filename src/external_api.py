@@ -4,13 +4,11 @@ import requests
 from dotenv import load_dotenv
 
 
-def get_convert_to_rub(transactions: dict) -> float|str:
+def get_convert_to_rub(transactions):
     """
     Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях, тип данных — float.
     Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
     и конвертации суммы операции в рубли.
-    :param transactions:
-    :return:
     """
     if ((transactions.get("operationAmount")).get("currency")).get("code") != "RUB":
         name = ((transactions.get("operationAmount")).get("currency")).get("code")
@@ -23,7 +21,10 @@ def get_convert_to_rub(transactions: dict) -> float|str:
         headers = {
           "apikey": f"{api_key}"
         }
-        response = requests.get(url, headers=headers, data=payload)
+        try:
+            response = requests.get(url, headers=headers, data=payload)
+        except requests.exceptions.ConnectionError:
+            return "Ошибка подключения. Проверьте сетевое подключение."
         result = response.json()
         return round(result.get("result"), 2)
     else:
