@@ -134,3 +134,25 @@ def data():
             }
         ]
     )
+
+
+@pytest.fixture
+def test_dict_usd():
+    return {"operationAmount": {
+                        "amount": 1,
+                        "currency": {
+                            "name": "руб",
+                            "code": "USD"}
+                        }
+            }
+
+
+@pytest.fixture
+def test_dict_rub():
+    return {"operationAmount": {
+                        "amount": 1,
+                        "currency": {
+                            "name": "руб",
+                            "code": "RUB"}
+                        }
+            }
