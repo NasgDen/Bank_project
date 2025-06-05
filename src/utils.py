@@ -17,7 +17,7 @@ def read_json(path_to_json: str) -> list[dict]:
     :param path_to_json: путь до json файла
     :return transactions: список транзакций
     """
-    utils_log.info(f"Вызов модуля {__name__}")
+    utils_log.debug(f"Вызов функции {read_json.__name__}")
     try:
         with open(path_to_json, mode="r", encoding="utf-8") as file:
             transactions = json.load(file)
