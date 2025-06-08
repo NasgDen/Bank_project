@@ -134,4 +134,5 @@ if __name__ == "__main__":
         print(card_number)
 
     list_transactions = read_json(PATH_TO_JSON_FILE)
-    print(get_convert_to_rub(list_transactions[1]))
+    if list_transactions:
+        print(get_convert_to_rub(list_transactions[1]))
