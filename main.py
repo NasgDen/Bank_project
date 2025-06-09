@@ -4,9 +4,9 @@ from src.external_api import get_convert_to_rub
 from src.generator import card_number_generator, filter_by_currency, transaction_descriptions
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
+from src.read_files import read_cvs_file, read_excel_file
 from src.utils import read_json
 from src.widget import get_date, mask_account_card
-from src.read_files import read_cvs_file, read_excel_file
 
 PATH_TO_JSON_FILE = os.path.join(os.getcwd(), "data", "operations.json")
 PATH_TO_CSV_FILE = os.path.join(os.getcwd(), "data", "transactions.csv")
@@ -137,9 +137,8 @@ if __name__ == "__main__":
         print(card_number)
 
     list_transactions = read_json(PATH_TO_JSON_FILE)
-    print(list_transactions)
     if list_transactions:
-        print(get_convert_to_rub(list_transactions[2]))
+        print(get_convert_to_rub(list_transactions[0]))
 
     print(read_cvs_file(PATH_TO_CSV_FILE))
     print(read_excel_file(PATH_TO_EXCEL_FILE))
