@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 from src.decorators import log
 
@@ -32,3 +33,20 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
         if match:
             data_find.append(data_search)
     return data_find
+
+
+def process_bank_operations(data:list[dict], categories:list) -> dict:
+    """
+    Функцию принимать список словарей с данными о банковских операциях и список категорий операций.
+    Возвращает словарь, в котором ключи — это названия категорий, а значения — это количество операций в каждой категории.
+    """
+    data_categories = {}
+    categories_to_count = [item["description"] for item in data]
+    categories_to_count = dict(Counter(categories_to_count))
+    for category in categories:
+        if category in categories_to_count:
+            data_categories[category] = categories_to_count[category]
+    return data_categories
+
+
+
