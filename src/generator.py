@@ -1,13 +1,13 @@
 from typing import Generator, Iterator
 
 
-def filter_by_currency(transaction: list[dict], code="") -> Iterator[dict]:
+def filter_by_currency(transaction: list[dict], code="") -> list[dict]:
     """
     Функция принимает на вход список словарей, представляющих транзакции.
     Возвращает итератор, который поочередно выдает транзакции, где валюта операции соответствует заданной.
     """
-    filtered_currency = [trans for trans in transaction if trans["operationAmount"]["currency"].get("code") == code]
-    return iter(filtered_currency)
+    filtered_currency = [trans for trans in transaction if trans.get("currency_code") == code]
+    return filtered_currency
 
 
 def transaction_descriptions(transaction: list[dict]) -> Generator[None]:

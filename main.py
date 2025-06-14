@@ -36,6 +36,7 @@ def main():
             break
         else:
             print("Неверный ввод данных")
+
     while True:
         print("Введите статус, по которому необходимо выполнить фильтрацию.")
         print("Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
@@ -46,6 +47,7 @@ def main():
             break
         else:
             print(f"Статус операции '{select_state}' недоступен.")
+
     while True:
         print("Отсортировать операции по дате? Да/Нет")
         select = input("> ").lower()
@@ -58,7 +60,6 @@ def main():
                 break
             elif select == "по убыванию":
                 sorted_data = sort_by_date(filter_data, True)
-                print(sorted_data)
                 break
             else:
                 print("Введены неверные данные")
@@ -67,10 +68,45 @@ def main():
             break
         else:
             print("Введены неверные данные")
+
     while True:
         print("Выводить только рублевые транзакции? Да/Нет")
         select = input("> ").lower()
+        if select == "да":
+            filter_data_by_rub = filter_by_currency(sorted_data, "RUB")
+            break
+        if select == "нет":
+            filter_data_by_rub = sorted_data
+            break
+        else:
+            print("Введены неверные данные")
 
+    while True:
+        print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
+        select = input("> ")
+        if select == "да":
+            word_description = input("Введите слово для фильтрации транзакций: ")
+            result_data = process_bank_search(filter_data_by_rub, word_description)
+            break
+        elif select == "нет":
+            result_data = filter_data_by_rub
+            break
+        else:
+            print("Введены неверные данные")
+
+    print("Распечатываю итоговый список транзакций...")
+
+    if len(list(result_data)) > 0:
+        print(f"Всего банковских операций в выборке: {len(list(result_data))}")
+        for data in result_data:
+            print(f"{get_date(data["date"])} {data["description"]}")
+            if str(data["description"]) == "Открытие вклада":
+                print(mask_account_card(str(data["to"])))
+            else:
+                print(f"{mask_account_card(str(data["from"]))} -> {mask_account_card(str(data["to"]))}")
+            print(f"Сумма: {(data["amount"])} {(data["currency_code"])}\n")
+    else:
+        print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
 
 
 if __name__ == "__main__":
