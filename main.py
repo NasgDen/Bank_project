@@ -23,7 +23,21 @@ def main():
         select = input("> ")
         if select == "1":
             print("Для обработки выбран JSON-файл.")
-            data = read_json(PATH_TO_JSON_FILE)
+            data_json = read_json(PATH_TO_JSON_FILE)
+            # Приведение формата данных считанных из json файла
+            data = []
+            for item in data_json:
+                data_dict = dict()
+                data_dict["id"] = item.get("id")
+                data_dict["state"] = item.get("state")
+                data_dict["date"] = item.get("date")
+                data_dict["amount"] = (item.get("operationAmount")).get("amount")
+                data_dict["currency_name"] = ((item.get("operationAmount")).get("currency")).get("name")
+                data_dict["currency_code"] = ((item.get("operationAmount")).get("currency")).get("code")
+                data_dict["from"] = item.get("from")
+                data_dict["to"] = item.get("to")
+                data_dict["description"] = item.get("description")
+                data.append(data_dict)
             break
         elif select == "2":
             print("Для обработки выбран CSV-файл.")
