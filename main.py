@@ -12,6 +12,9 @@ PATH_TO_EXCEL_FILE = os.path.join(os.getcwd(), "data", "transactions_excel.xlsx"
 
 
 def main():
+    """
+    Основная логика программы
+    """
     while True:
         print("""
 Привет! Добро пожаловать в программу работы с банковскими транзакциями.
