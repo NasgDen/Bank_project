@@ -1,6 +1,7 @@
-from src.processing import filter_by_state, sort_by_date, process_bank_search, process_bank_operations
-from tests.conftest import list_of_dic_canceled, list_of_dic_executed, sort_by_date_ascending, sort_by_date_descending
 import pytest
+
+from src.processing import filter_by_state, process_bank_operations, process_bank_search, sort_by_date
+from tests.conftest import list_of_dic_canceled, list_of_dic_executed, sort_by_date_ascending, sort_by_date_descending
 
 
 # Тестирование функции filter_by_state с помощью Фикстур
@@ -52,7 +53,7 @@ def test_sort_by_date_identical(sort_by_date_identical):
                     "to": "Счет 11776614605963066702",
                 }
             ],
-              "Перевод",
+            "Перевод",
             [
                 {
                     "id": 939719570,
@@ -72,8 +73,10 @@ def test_sort_by_date_identical(sort_by_date_identical):
 def test_process_bank_search(value, string, expected):
     assert process_bank_search(value, string) == expected
 
+
 def test_process_bank_search_zero_data():
     assert process_bank_search([], "Перевод") == []
+
 
 def test_process_bank_search_zero_string():
     assert process_bank_search([{"id": 939719570, "description": "Перевод организации"}], "Открытие") == []
@@ -114,6 +117,3 @@ def test_process_bank_search_zero_string():
                          )
 def test_process_bank_operations(value, words, expected):
     assert process_bank_operations(value, words) == expected
-
-
-

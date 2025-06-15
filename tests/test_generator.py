@@ -20,7 +20,7 @@ from src.generator import card_number_generator, filter_by_currency, transaction
             ],
             "USD",
             {
-                "id": 939719570,
+                    "id": 939719570,
                     "state": "EXECUTED",
                     "date": "2018-06-30T02:08:58.425572",
                     "amount": "9824.07",

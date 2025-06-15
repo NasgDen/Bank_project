@@ -40,8 +40,8 @@ def process_bank_operations(data: list[dict], categories: list) -> dict:
     """
     data_categories = {}
     categories_to_count = [item["description"] for item in data]
-    categories_to_count = Counter(categories_to_count)
+    categories_to_count_dict = Counter(categories_to_count)
     for category in categories:
-        if category in categories_to_count:
-            data_categories[category] = categories_to_count[category]
+        if category in categories_to_count_dict:
+            data_categories[category] = categories_to_count_dict[category]
     return data_categories
